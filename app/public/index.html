@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学习助手 · 只生成你看得懂的代码</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">学</div>
+      <div class="brand-text">
+        <h1>学习助手</h1>
+        <p>只生成你看得懂的代码</p>
+      </div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <button type="button" class="nav-item active" data-view="chat">
+        <span class="nav-icon">◈</span><span>代码生成</span><span class="nav-sub">按你的知识点写</span>
+      </button>
+      <button type="button" class="nav-item" data-view="knowledge">
+        <span class="nav-icon">▤</span><span>知识点画像</span><span class="nav-sub">我会什么</span>
+      </button>
+      <button type="button" class="nav-item" data-view="playground">
+        <span class="nav-icon">▷</span><span>代码演示</span><span class="nav-sub">跑一下看看</span>
+      </button>
+      <button type="button" class="nav-item" data-view="settings">
+        <span class="nav-icon">⚙</span><span>设置</span><span class="nav-sub">模型与 Key</span>
+      </button>
+    </nav>
+
+    <div class="side-foot">
+      <div class="side-status" id="side-status">正在连接本地服务…</div>
+      <div class="side-hint">数据只保存在本机 app/data/</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="titles">
+        <h2 id="view-title">代码生成</h2>
+        <span id="view-desc">描述需求，生成限定在已掌握知识点内的代码</span>
+      </div>
+      <div class="badges">
+        <span class="badge" id="badge-model">模型：—</span>
+        <span class="badge badge-warn" id="badge-mock">演示模式</span>
+        <span class="badge" id="badge-key">未配置 Key</span>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- ============ 代码生成 ============ -->
+      <section class="view active" id="view-chat">
+        <div class="chat-layout">
+          <div class="card session-panel">
+            <div class="panel-head">
+              <h3>会话记录</h3>
+              <button type="button" class="btn btn-mini" id="btn-new-session">＋ 新建</button>
+            </div>
+            <div class="session-list" id="session-list"></div>
+          </div>
+
+          <div class="chat-main">
+            <div class="card composer">
+              <div class="composer-top">
+                <div class="segmented" id="mode-tabs">
+                  <button type="button" class="seg active" data-mode="code">生成代码</button>
+                  <button type="button" class="seg" data-mode="explain">知识点解析</button>
+                  <button type="button" class="seg" data-mode="review">代码审查</button>
+                </div>
+                <span class="mode-tip" id="mode-tip">按画像生成可运行代码</span>
+              </div>
+
+              <textarea id="question" rows="4" placeholder="例如：写一个统计一段文字里每个单词出现次数的程序，按次数从多到少输出。&#10;也可以把已有代码贴进来，切换到「知识点解析」或「代码审查」。"></textarea>
+
+              <div class="composer-row">
+                <label class="btn btn-ghost file-btn">📎 选择文件
+                  <input type="file" id="file-input" multiple hidden>
+                </label>
+                <label class="btn btn-ghost file-btn">🖼 选择图片
+                  <input type="file" id="image-input" accept="image/png,image/jpeg,image/gif,image/webp" multiple hidden>
+                </label>
+                <select id="language-select" class="select">
+                  <option value="">语言：自动</option>
+                  <option value="python">Python</option>
+                  <option value="javascript">JavaScript</option>
+                  <option value="html">HTML</option>
+                  <option value="java">Java</option>
+                  <option value="c">C / C++</option>
+                  <option value="sql">SQL</option>
+                </select>
+                <button type="button" class="btn btn-primary" id="btn-generate">生成 ✦</button>
+              </div>
+
+              <div class="attachments" id="attachments"></div>
+              <div class="tip-line" id="composer-tip"></div>
+            </div>
+
+            <div class="result-area" id="result">
+              <div class="empty-state">
+                <div class="empty-icon">◈</div>
+                <h3>先告诉我你想做什么</h3>
+                <p>生成结果会按「实现思路 → 代码 → 知识点对照 → 超纲清单 → 自测小题」展示。<br>
+                   凡是超出你画像的写法，都会被单独列成卡片，并附带讲解。</p>
+                <div class="empty-chips">
+                  <button type="button" class="chip" data-sample="写一个统计单词出现次数的 Python 程序">统计单词次数</button>
+                  <button type="button" class="chip" data-sample="做一个输入名字后显示问候语的网页">问候网页</button>
+                  <button type="button" class="chip" data-sample="解释这段代码：for i in range(3): print(i)">解释一段代码</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 知识点画像 ============ -->
+      <section class="view" id="view-knowledge">
+        <div class="page-head">
+          <div>
+            <h3>知识点画像</h3>
+            <p>模型只能自由使用「已掌握」的知识点。清单越准确，生成的代码越看得懂。</p>
+          </div>
+          <div class="head-actions">
+            <button type="button" class="btn btn-ghost" id="btn-export-k">导出 JSON</button>
+            <button type="button" class="btn btn-ghost" id="btn-toggle-import">批量导入</button>
+          </div>
+        </div>
+
+        <div class="stat-row" id="stat-row"></div>
+
+        <div class="card section-card">
+          <div class="section-title">载入预设模板</div>
+          <div class="preset-row">
+            <select id="preset-select" class="select grow"></select>
+            <button type="button" class="btn btn-primary" id="btn-load-preset">合并载入</button>
+            <button type="button" class="btn btn-ghost" id="btn-replace-preset">替换全部</button>
+            <span class="hint" id="preset-hint">合并：只补充新条目，不改你已设置的等级</span>
+          </div>
+        </div>
+
+        <div class="card section-card hidden" id="import-box">
+          <div class="section-title">批量导入（每行一条）</div>
+          <p class="hint">格式：<code>知识点名称, 分类, 等级</code>；等级可写 已掌握 / 接触过 / 未学 或 mastered / seen / unknown，省略则默认「未学」。</p>
+          <textarea id="import-text" rows="5" placeholder="列表推导式, Python 基础, 未学&#10;for 循环, Python 基础, 已掌握"></textarea>
+          <div class="row-end"><button type="button" class="btn btn-primary" id="btn-do-import">导入</button></div>
+        </div>
+
+        <div class="card section-card">
+          <div class="section-title">新增知识点</div>
+          <div class="add-row">
+            <input id="k-name" class="input grow" placeholder="知识点名称，例如：列表推导式">
+            <input id="k-category" class="input" placeholder="分类（可留空）">
+            <select id="k-level" class="select">
+              <option value="mastered">已掌握</option>
+              <option value="seen">接触过</option>
+              <option value="unknown" selected>未学</option>
+            </select>
+            <button type="button" class="btn btn-primary" id="btn-add-k">添加</button>
+          </div>
+        </div>
+
+        <div id="knowledge-groups" class="knowledge-groups"></div>
+      </section>
+
+      <!-- ============ 代码演示 ============ -->
+      <section class="view" id="view-playground">
+        <div class="page-head">
+          <div>
+            <h3>代码测试与演示</h3>
+            <p>HTML / JavaScript 在浏览器沙箱里运行；Python 需本机开启后才会执行。</p>
+          </div>
+          <div class="head-actions">
+            <select id="play-lang" class="select">
+              <option value="javascript">JavaScript</option>
+              <option value="html">HTML</option>
+              <option value="python">Python</option>
+            </select>
+            <button type="button" class="btn btn-ghost" id="btn-load-example">载入示例</button>
+            <button type="button" class="btn btn-ghost" id="btn-clear-code">清空</button>
+            <button type="button" class="btn btn-primary" id="btn-run">▶ 运行</button>
+          </div>
+        </div>
+
+        <div class="play-layout">
+          <div class="card play-editor">
+            <div class="panel-head"><span class="code-lang" id="editor-label">JavaScript</span><span class="hint" id="play-hint">在沙箱 iframe 中运行，不能访问本页数据</span></div>
+            <textarea id="play-code" spellcheck="false"></textarea>
+          </div>
+          <div class="card play-output">
+            <div class="panel-head">
+              <span>运行结果</span>
+              <button type="button" class="btn btn-mini" id="btn-clear-output">清空输出</button>
+            </div>
+            <pre id="play-output-text">（还没有运行记录）</pre>
+            <div class="play-frame-box" id="frame-box"></div>
+          </div>
+        </div>
+        <div class="notice" id="play-notice"></div>
+      </section>
+
+      <!-- ============ 设置 ============ -->
+      <section class="view" id="view-settings">
+        <div class="page-head">
+          <div>
+            <h3>模型设置</h3>
+            <p>API Key 只写在本机 <code>app/data/config.json</code>，不会返回给浏览器页面，也不会出现在日志里。</p>
+          </div>
+        </div>
+
+        <div class="card section-card">
+          <div class="section-title">DeepSeek 接口</div>
+          <div class="form-grid">
+            <label class="field">
+              <span>API Key</span>
+              <div class="input-row">
+                <input type="password" id="cfg-key" class="input" autocomplete="off" placeholder="sk-...">
+                <button type="button" class="btn btn-mini" id="btn-toggle-key">显示</button>
+              </div>
+              <small id="key-hint">留空表示不修改已保存的 Key</small>
+            </label>
+            <label class="field">
+              <span>接口地址 baseUrl</span>
+              <input id="cfg-base" class="input" placeholder="https://api.deepseek.com">
+              <small>OpenAI 兼容地址，也可填 /v1</small>
+            </label>
+            <label class="field">
+              <span>主模型</span>
+              <input id="cfg-model" class="input" list="model-options" placeholder="deepseek-flash">
+              <datalist id="model-options">
+                <option value="deepseek-flash"></option>
+                <option value="deepseek-v4-pro"></option>
+                <option value="deepseek-v4-flash"></option>
+              </datalist>
+              <small>模型名会更新，请以官方平台为准，这里可随时改</small>
+            </label>
+            <label class="field">
+              <span>视觉模型（上传图片时使用）</span>
+              <input id="cfg-vision" class="input" placeholder="deepseek-flash">
+              <small>现役 Flash 已支持图片输入；旧 vision-exp 名称仅作兼容</small>
+            </label>
+            <label class="field">
+              <span>温度 temperature：<b id="temp-value">0.3</b></span>
+              <input type="range" id="cfg-temp" min="0" max="1" step="0.1" value="0.3">
+              <small>越低越稳定、越守规则，建议 0.2～0.4</small>
+            </label>
+          </div>
+
+          <div class="switch-row">
+            <label class="switch"><input type="checkbox" id="cfg-thinking"><span>开启思考模式（更慢，但复杂推理更强；开启后温度不生效）</span></label>
+            <label class="switch"><input type="checkbox" id="cfg-mock" checked><span>演示模式（不调用真实模型，用内置示例跑通全流程）</span></label>
+          </div>
+        </div>
+
+        <div class="card section-card">
+          <div class="section-title">本机代码执行</div>
+          <label class="switch"><input type="checkbox" id="cfg-runner"><span>允许在本机运行 Python 代码（默认关闭）</span></label>
+          <div class="risk">
+            ⚠ 这不是真正的沙箱：Python 进程仍以你的账户权限运行。仅在自己电脑上、只运行自己看得懂的代码。
+            已启用隔离模式（<code>-I -S</code>）、3 秒超时、输出截断；请勿开启公网访问。
+          </div>
+        </div>
+
+        <div class="row-end settings-actions">
+          <button type="button" class="btn btn-ghost" id="btn-test-conn">测试连接</button>
+          <button type="button" class="btn btn-primary" id="btn-save-cfg">保存设置</button>
+        </div>
+        <div class="notice" id="settings-notice"></div>
+
+        <div class="card section-card">
+          <div class="section-title">运行说明</div>
+          <ul class="plain-list">
+            <li>启动：双击项目根目录的 <code>start.bat</code>，或运行 <code>node app/server.js</code></li>
+            <li>停止：在运行窗口按 Ctrl + C</li>
+            <li>备份：复制 <code>app/data/</code> 目录即可；恢复后重启服务</li>
+            <li>零依赖：不需要 <code>npm install</code>，前端也不加载任何 CDN</li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<div id="toast" class="toast"></div>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+{
+  "updatedAt": "2026-11-11T12:14:43.571Z",
+  "items": [
+    {
+      "id": "k_mw7mk6quv350",
+      "name": "Java语法基础，数组 集合框架 多线程基础",
+      "category": "自定义",
+      "level": "unknown",
+      "note": ""
+    },
+    {
+      "id": "k_6e939b0c806f",
+      "name": "class 类",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_0ab74d9e5357",
+      "name": "展开运算符",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_d4222119eb8e",
+      "name": "类与对象",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_8e3a7467c526",
+      "name": "类与静态成员变量 static",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_8b14e4e84ddc",
+      "name": "匿名内部类 new Runnable(){...}",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_1f68b105fd57",
+      "name": "try/catch 异常处理",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_7ac644e40916",
+      "name": "Thread.sleep",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_048b5f76ac3f",
+      "name": "synchronized 加锁",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_6f53b3c0ff83",
+      "name": "多线程基础（Thread / Runnable / start）",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_692c2e865652",
+      "name": "变量与基本类型",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_524f2b33839c",
+      "name": "数组（含二维数组）",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_92ddc243f59d",
+      "name": "if 条件判断",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_1cdaf5d3d394",
+      "name": "while 循环 / for 循环",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_1f05b6624180",
+      "name": "循环控制（break / continue）",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_3fae62b8213a",
+      "name": "方法定义与调用",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_3a3a31364be4",
+      "name": "输入输出（Scanner / System.out）",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_721856d80e00",
+      "name": "模块 import",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_492794a2c35a",
+      "name": "for 循环",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_2d60ce993c1b",
+      "name": "String.charAt(int)",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_c92d9c89362a",
+      "name": "String.length()",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_cedee79a460e",
+      "name": "String.substring(int,int)",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_9886fadc8255",
+      "name": "wait() 方法",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    },
+    {
+      "id": "k_24f89de0f8f4",
+      "name": "notifyAll() 方法",
+      "category": "自定义",
+      "level": "mastered",
+      "note": "由超纲卡片一键加入"
+    }
+  ]
+}

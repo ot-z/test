@@ -1,0 +1,12 @@
+{
+  "apiKey": "sk-a8134dcde3c94556bca2121f03f83415",
+  "baseUrl": "https://api.deepseek.com",
+  "model": "deepseek-flash",
+  "visionModel": "deepseek-flash",
+  "temperature": 0.3,
+  "thinking": false,
+  "mock": false,
+  "enableRunner": true,
+  "maxFileChars": 12000,
+  "maxTotalChars": 24000
+}
